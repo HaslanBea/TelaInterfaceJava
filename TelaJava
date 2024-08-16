@@ -1,0 +1,44 @@
+//Crie uma janela de diálogo que deve aparecer se, ao clicar no botão, o valor for maior que 500. Essa janela de diálogo deve aparecer com um campo para o usuário informar um percentual de desconto. O usuário informará apenas números.
+
+//Por fim, faça com que o valor total seja calculado (com desconto, caso tenha havido algum) e mostrado por meio de outra caixa de diálogo.
+
+//imports
+
+import javax.swing.JOptionPane;
+
+
+public class Main {
+    public static void main(String[] args)
+  {
+    //declaração de variáveis
+    Double valor;
+    Double desconto;
+    Double valorFinal;
+
+    //janela principal
+    JOptionPane.showMessageDialog(null, "Registro de Vendas\n");
+    valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor da venda: "));
+    //condição
+if (valor > 500) {
+  while (true) { // Loop para solicitar o desconto até que seja válido
+      try {
+          desconto = Double.parseDouble(JOptionPane.showInputDialog("Digite o percentual de desconto (apenas números): "));
+          if (desconto >= 0 && desconto <= 100) { // Verifica se o desconto está entre 0 e 100
+              break; // Sai do loop se o desconto for válido
+          } else {
+              JOptionPane.showMessageDialog(null, "Desconto inválido. Digite um valor entre 0 e 100.");
+          }
+      } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(null, "Entrada inválida. Digite apenas números.");
+      }
+  }
+  // Cálculo do desconto e do valor final
+  valorFinal = valor - (valor * (desconto / 100));
+  // Mostra o valor final com desconto
+  JOptionPane.showMessageDialog(null, "Valor final da venda com desconto: " + valorFinal);
+} else {
+  // Se o valor for menor ou igual a 500, mostra o valor sem desconto
+  JOptionPane.showMessageDialog(null, "Valor final da venda: " + valor);
+}
+}
+}
